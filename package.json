@@ -2,7 +2,7 @@
   "name": "foundation-project",
   "version": "1.0.0",
   "description": "Foundation 6 Project",
-  "main": "index.php",
+  "main": "public/index.php",
   "repository": {
     "type": "git",
     "url": "git@github.com:kvnmcg/foundation-project.git"
