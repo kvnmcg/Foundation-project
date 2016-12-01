@@ -15,17 +15,17 @@ const svgmin = require('gulp-svgmin');
 
 // SCSS compile and autoprefixer
 gulp.task('sass', () => {
-    return gulp.src('./dev/scss/**/*.scss')
+    return gulp.src('dev/scss/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(autoprefixer())
         .pipe(sourcemaps.write('', {addComment: false}))
-        .pipe(gulp.dest('./public/css'));
+        .pipe(gulp.dest('public/css'));
 });
 
 // JSHint/Lint
 gulp.task('hint', () => {
-    return gulp.src('./dev/js/*.js')
+    return gulp.src('dev/js/*.js')
         .pipe(jshint({esnext: true}))
         .pipe(jshint.reporter(stylish))
 });
@@ -34,16 +34,16 @@ gulp.task('hint', () => {
 gulp.task('compress', (cb) => {
     pump([
             gulp.src([
-                './node_modules/jquery/dist/jquery.js',
-                './node_modules/foundation-sites/dist/foundation.js',
-                './dev/js/*.js'
+                'node_modules/jquery/dist/jquery.js',
+                'node_modules/foundation-sites/dist/foundation.js',
+                'dev/js/*.js'
             ]),
             sourcemaps.init(),
             babel({presets: ['es2015']}),
             concat('app.js'),
             uglify(),
             sourcemaps.write('', {addComment: false}),
-            gulp.dest('./public/js')
+            gulp.dest('public/js')
         ],
         cb
     );
@@ -51,29 +51,29 @@ gulp.task('compress', (cb) => {
 
 // Image minification
 gulp.task('img', () => {
-    return gulp.src('./dev/img/*')
+    return gulp.src('dev/img/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('./public/img/'));
+        .pipe(gulp.dest('public/img/'));
 });
 
 // SVG minification
 gulp.task('svg', () => {
-    return gulp.src('./dev/svg/**/*.svg')
+    return gulp.src('dev/svg/**/*.svg')
         .pipe(svgmin({
             plugins: [
                 {removeDoctype: true},
                 {removeComments: true}
             ]
         }))
-        .pipe(gulp.dest('./public/svg'));
+        .pipe(gulp.dest('public/svg'));
 });
 
 // Watch
 gulp.task('watch', () => {
-    gulp.watch('./dev/scss/**/*.scss', ['sass']);
-    gulp.watch('./dev/js/**/*.js', ['js']);
-    gulp.watch('./dev/img/**/*.*', ['img']);
-    gulp.watch('./dev/svg/**/*.svg', ['svg']);
+    gulp.watch('dev/scss/**/*.scss', ['sass']);
+    gulp.watch('dev/js/**/*.js', ['js']);
+    gulp.watch('dev/img/**', ['img']);
+    gulp.watch('dev/svg/**/*.svg', ['svg']);
 });
 
 // Default task
