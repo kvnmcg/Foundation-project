@@ -35,7 +35,7 @@ gulp.task('compress', (cb) => {
     pump([
             gulp.src([
                 'node_modules/jquery/dist/jquery.js',
-                'node_modules/foundation-sites/dist/foundation.js',
+                'node_modules/foundation-sites/dist/js/foundation.js',
                 'dev/js/*.js'
             ]),
             sourcemaps.init(),
